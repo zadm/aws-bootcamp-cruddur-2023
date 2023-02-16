@@ -1,5 +1,12 @@
 # Week 0 — Billing and Architecture
 
+# Logical Diagram
+
+- [Logical diagram v1](../week0/images/Cruddur%20-%20Logical%20Diagram.png)
+
+- [Logical Lucidchart](https://lucid.app/lucidchart/49f7d1f7-ff3a-471b-8674-bd23124c4ef6/edit?viewport_loc=-414%2C-463%2C2899%2C1459%2C0_0&invitationId=inv_13e5eaeb-5cc2-426c-afbd-9f1aa4c6acb5)
+
+
 # Pipline
 
 - [Pipline Lucidchart](https://lucid.app/lucidchart/12ffdba1-6cff-46f2-b665-1a8773b81caf/edit?beaconFlowId=5E31E2692B026FAE&invitationId=inv_62dffc7f-1b95-46b9-94c8-2b8828bdf9ec&page=0_0#)

@@ -1,4 +1,8 @@
 
+tasks:
+  - name: Initialize & Configure AWS
+    command: bash $GITPOD_REPO_ROOT/configure_aws_with_gitpod.sh
+    
 vscode:
   extensions:
     - 42Crunch.vscode-openapi

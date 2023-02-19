@@ -2,9 +2,7 @@
 
 # Required Homework
 
-## Build the application
-
-### Containerize Application (Dockerfiles, Docker Compose)
+## Containerize Application (Dockerfiles, Docker Compose)
 
 [Link to the backend docker file](../backend-flask/Dockerfile)
 

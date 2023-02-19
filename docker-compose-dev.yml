@@ -18,8 +18,8 @@ services:
       context: frontend-react-js/
       dockerfile: Dockerfile
     env_file:
-      - frontend-react-js/env/global.env
-      - frontend-react-js/env/dev.env
+      - frontend-react-js/environment/global.env
+      - frontend-react-js/environment/dev.env
 
     ports:
       - 3000:3000

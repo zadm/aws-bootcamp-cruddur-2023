@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  backend-flask:
+    image: zk15.xyz/aws-bootcamp/backend-flask:latest
+    build:
+      context: backend-flask/
+      dockerfile: backend-flask/Dockerfile
+    env_file:
+      - backend-flask/environment/global.env
+      - backend-flask/environment/prod.env
+
+    ports:
+      - 8080:8080
+  # worker:
+  #   build: .
+  #   entrypoint: ["celery", "-A", "sre_network_automation.celery.celery", "worker"]
+  #   depends_on:
+  #     - redis
+  # redis:
+  #   image: redis

@@ -24,6 +24,6 @@ docker-compose -f docker-compose-dev.yml  up --build
 ````
 3. Make the ports public
 4. Open the cruddur URL in your browser
-[Cruddur in gitpod](../_docs/assets/week1/Cruddur-gitpod.png)
+![Cruddur in gitpod](../_docs/assets/week1/Cruddur-gitpod.png)
 
 

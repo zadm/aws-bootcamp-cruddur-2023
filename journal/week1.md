@@ -40,3 +40,15 @@ docker-compose -f docker-compose.yml  up --build
 Notification feature added to the application 
 
 ![Notification react js endpoint](../_docs/assets/week1/Cruddur-create-notification.png)
+
+#  Homework Challenges   
+
+## Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
+
+1. Docker locally 
+
+![Local docker](../_docs/assets/week1/docker-local.png)
+
+2. Cruddur locally
+
+![Local docker](../_docs/assets/week1/cruddur-local.png)

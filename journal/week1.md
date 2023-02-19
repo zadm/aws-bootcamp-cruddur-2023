@@ -1,5 +1,7 @@
 # Week 1 — App Containerization
 
+# Required Homework
+
 ## Build the application
 
 ### Containerize Application (Dockerfiles, Docker Compose)

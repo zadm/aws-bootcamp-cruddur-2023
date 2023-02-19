@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   backend-flask:
-    image: zk15.xyz/aws-bootcamp-backen/backend-flask:latest
+    image: zk15.xyz/aws-bootcamp/backend-flask:latest
     build:
       context: backend-flask/
       dockerfile: Dockerfile
@@ -12,6 +12,21 @@ services:
 
     ports:
       - 8080:8080
+  frontend-react-js:
+    image: zk15.xyz/aws-bootcamp/frontend-react-js:latest
+    build:
+      context: frontend-react-js/
+      dockerfile: Dockerfile
+    env_file:
+      - frontend-react-js/env/global.env
+      - frontend-react-js/env/dev.env
+
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend-react-js:/frontend-react-js
+    depends_on:
+      - backend-flask
   # worker:
   #   build: .
   #   entrypoint: ["celery", "-A", "sre_network_automation.celery.celery", "worker"]

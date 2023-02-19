@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   backend-flask:
-    image: zk15.xyz/aws-bootcamp-backen/backend-flask:latest
+    image: zk15.xyz/aws-bootcamp/backend-flask:latest
     build:
       context: backend-flask/
       dockerfile: backend-flask/Dockerfile

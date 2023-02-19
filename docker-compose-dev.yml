@@ -24,10 +24,5 @@ services:
       - ./frontend-react-js:/frontend-react-js
     depends_on:
       - backend-flask
-  # worker:
-  #   build: .
-  #   entrypoint: ["celery", "-A", "sre_network_automation.celery.celery", "worker"]
-  #   depends_on:
-  #     - redis
   # redis:
   #   image: redis

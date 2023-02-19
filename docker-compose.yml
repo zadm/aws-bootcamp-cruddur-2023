@@ -5,17 +5,24 @@ services:
     image: zk15.xyz/aws-bootcamp/backend-flask:latest
     build:
       context: backend-flask/
-      dockerfile: backend-flask/Dockerfile
-    env_file:
-      - backend-flask/environment/global.env
-      - backend-flask/environment/prod.env
-
+      dockerfile: Dockerfile
+    environment:
+      - FRONTEND_URL=${FRONTEND_URL}
+      - BACKEN_URL=${BACKEND_URL}
     ports:
       - 8080:8080
-  # worker:
-  #   build: .
-  #   entrypoint: ["celery", "-A", "sre_network_automation.celery.celery", "worker"]
-  #   depends_on:
-  #     - redis
+  frontend-react-js:
+    image: zk15.xyz/aws-bootcamp/frontend-react-js:latest
+    build:
+      context: frontend-react-js/
+      dockerfile: Dockerfile
+    environment:
+      - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend-react-js:/frontend-react-js
+    depends_on:
+      - backend-flask
   # redis:
   #   image: redis

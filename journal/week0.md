@@ -104,3 +104,4 @@ aws  sns list-subscriptions-by-topic  --topic arn:aws:sns:us-east-1:<ACCOUNT-ID>
     ]
 }
 ```
+- [notification proof](../_docs/assets/week0/images/proof-event-bridge.png)

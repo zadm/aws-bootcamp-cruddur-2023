@@ -6,10 +6,9 @@ services:
     build:
       context: backend-flask/
       dockerfile: Dockerfile
-    env_file:
-      - backend-flask/env/global.env
-      - backend-flask/env/dev.env
-
+    environment:
+      - FRONTEND_URL=${FRONTEND_URL}
+      - BACKEN_URL=${BACKEND_URL}
     ports:
       - 8080:8080
   frontend-react-js:
@@ -17,10 +16,8 @@ services:
     build:
       context: frontend-react-js/
       dockerfile: Dockerfile
-    env_file:
-      - frontend-react-js/environment/global.env
-      - frontend-react-js/environment/dev.env
-
+    environment:
+      - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
     ports:
       - 3000:3000
     volumes:

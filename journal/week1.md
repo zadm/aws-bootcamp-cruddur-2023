@@ -86,7 +86,11 @@ aws dynamodb  batch-write-item  --endpoint-url http://localhost:8000  --request-
 
 <!-- [Video docker local](https://user-images.githubusercontent.com/18516249/220197658-90488e0a-653e-48ec-964b-69215a9568a5.mov) -->
 
-[![Video docker loca](../_docs/assets/week1/docker-local.png)](../_docs/assets/week1/docker-local.mp4)
+[![Video docker loca](../_docs/assets/week1/docker-local.png)]([../_docs/assets/week1/docker-local.mp4](https://user-images.githubusercontent.com/18516249/220201375-0b20206e-be26-479b-af17-704fd9a63a14.mp4))
+
+
+https://user-images.githubusercontent.com/18516249/220201375-0b20206e-be26-479b-af17-704fd9a63a14.mp4
+
 
 1. Cruddur locally
 

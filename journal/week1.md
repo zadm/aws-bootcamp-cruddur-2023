@@ -40,3 +40,39 @@ docker-compose -f docker-compose.yml  up --build
 Notification feature added to the application 
 
 ![Notification react js endpoint](../_docs/assets/week1/Cruddur-create-notification.png)
+
+## Run DynamoDB Local Container and ensure it works
+
+### Create a table
+
+![Cruddur local dynamo table](../_docs/assets/week1/Mongo-create-local-table.png)
+
+### List Tables
+
+![List table](../_docs/assets/week1/Mongo-local-table.png)
+
+### Create an Item
+
+[Item file](../backend-flask/dynamo_db/items.json)
+
+```bash
+aws dynamodb  batch-write-item  --endpoint-url http://localhost:8000  --request-items file://backend-flask/dynamo_db/items.json --return-consumed-capacity TOTAL  --profile bootcamp --no-cli-pager
+```
+
+![List table](../_docs/assets/week1/create-item-cruddur-table.png)
+
+### List items
+
+![List items](../_docs/assets/week1/list-items.png)
+
+# Homework Challenges
+
+## Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
+
+1. Docker locally 
+
+![Local docker](../_docs/assets/week1/docker-local.png)
+
+2. Cruddur locally
+
+![Local docker](../_docs/assets/week1/cruddur-local.png)

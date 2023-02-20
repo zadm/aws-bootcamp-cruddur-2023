@@ -41,7 +41,30 @@ Notification feature added to the application
 
 ![Notification react js endpoint](../_docs/assets/week1/Cruddur-create-notification.png)
 
-#  Homework Challenges   
+## Run DynamoDB Local Container and ensure it works
+
+### Create a table
+
+![Cruddur local dynamo table](../_docs/assets/week1/Mongo-create-local-table.png)
+
+### List Tables
+
+![List table](../_docs/assets/week1/Mongo-local-table.png)
+
+### Create an Item
+
+```bash
+aws dynamodb  batch-write-item  --endpoint-url http://localhost:8000  --request-items file://backend-flask/dynamo_db/items.json --return-consumed-capacity TOTAL  --profile bootcamp --no-cli-pager
+```
+![List table](../_docs/assets/week1/create-item-cruddur-table.png)
+
+### List items
+
+![List items](../_docs/assets/week1/list-items.png)
+
+
+
+# Homework Challenges
 
 ## Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
 

@@ -10,7 +10,7 @@ services:
       - FRONTEND_URL=${FRONTEND_URL}
       - BACKEN_URL=${BACKEND_URL}
     ports:
-      - 8080:8080
+      - 4567:4567
     depends_on:
       - dynamodb-local
       - db
@@ -55,7 +55,6 @@ networks:
   internal-network:
     driver: bridge
     name: cruddur
-    
 volumes:
   db:
     driver: local

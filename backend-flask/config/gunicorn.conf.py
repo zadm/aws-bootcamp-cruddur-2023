@@ -17,7 +17,7 @@
 #       range.
 #
 
-bind = '0.0.0.0:8080'
+bind = '0.0.0.0:4567'
 backlog = 2048
 #
 # Worker processes

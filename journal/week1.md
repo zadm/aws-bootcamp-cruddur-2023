@@ -53,16 +53,17 @@ Notification feature added to the application
 
 ### Create an Item
 
+[Item file](../backend-flask/dynamo_db/items.json)
+
 ```bash
 aws dynamodb  batch-write-item  --endpoint-url http://localhost:8000  --request-items file://backend-flask/dynamo_db/items.json --return-consumed-capacity TOTAL  --profile bootcamp --no-cli-pager
 ```
+
 ![List table](../_docs/assets/week1/create-item-cruddur-table.png)
 
 ### List items
 
 ![List items](../_docs/assets/week1/list-items.png)
-
-
 
 # Homework Challenges
 

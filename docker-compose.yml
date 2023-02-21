@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   backend-flask:
-    image: zk15.xyz/aws-bootcamp/backend-flask:latest
+    image: zk15xyz/cruddur-backend:latest
     build:
       context: backend-flask/
       dockerfile: Dockerfile
@@ -16,7 +16,7 @@ services:
       - db
 
   frontend-react-js:
-    image: zk15.xyz/aws-bootcamp/frontend-react-js:latest
+    image: zk15xyz/cruddur-frontend:latest
     build:
       context: frontend-react-js/
       dockerfile: Dockerfile

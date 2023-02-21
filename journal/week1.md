@@ -67,7 +67,39 @@ aws dynamodb  batch-write-item  --endpoint-url http://localhost:8000  --request-
 
 # Homework Challenges
 
-## Run the dockerfile CMD as an external script Push and tag a image to DockerHub (they have a free tier)
+## Run the dockerfile CMD as an external script 
+
+[Backend Docker file](../backend-flask/Dockerfile#L6)
+
+[Frontend Docker file](../backend-flask/Dockerfile#L31)
+
+The script is here [backend entrypoint](../backend-flask/entrypoint.sh) Or [frontend entrypoint](../frontend-react-js/entrypoint.sh)
+
+The script take 1 argument (service name [FLASK, NODE]) and depend on the argument, the right application is launched.
+
+Each application has their proper entrypoint for the feature cutom configuration.   
+
+
+## Push and tag a image to DockerHub (they have a free tier)
+
+The image is available to the public
+
+Local push proof 
+
+![push docker image](../_docs/assets/week1/proof-docker-image-backend.png)
+
+Docker hub 
+
+![push docker image](../_docs/assets/week1/Docker%20Hub.png)
+
+Pull the image 
+
+```bash
+docker pull zk15xyz/cruddur-backend:latest
+docker pull zk15xyz/cruddur-frontend:latest
+
+```
+
 
 ## Use multi-stage building for a Dockerfile build Implement a healthcheck in the V3 Docker compose file
 

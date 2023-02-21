@@ -14,6 +14,7 @@ SERVICE=$1
 if [ "$SERVICE" == "FLASK" ]; then
     gunicorn app:app -c /etc/gunicorn.conf.py
 elif [ "$SERVICE" == "NODE" ]; then
+    npm install
     npm start
 else
     usage

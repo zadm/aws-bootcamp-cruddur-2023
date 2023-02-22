@@ -12,3 +12,10 @@ vscode:
   extensions:
     - 42Crunch.vscode-openapi
     - cweijan.vscode-postgresql-client2
+    - amazonwebservices.aws-toolkit-vscode
+    - njpwerner.autodocstring
+    - adpyke.codesnap
+    - Meezilla.json
+    - ms-vscode.makefile-tools
+    - AncientLord.nightowl-theme
+    - redhat.vscode-yaml

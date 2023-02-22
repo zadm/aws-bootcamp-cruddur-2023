@@ -100,6 +100,13 @@ aws dynamodb scan  --endpoint-url http://localhost:8000 --table-name Cruddur --n
 
 ## Postgre
 
+Here is the to install postgres in gitpod [install postgres](/bash/install_postgre.sh)
+
+```bash
+psql  --host 127.0.0.1 --user postgres
+postgres-# \l
+```
+![Gitpod postgres](../_docs/assets/week1/gitpod-postgres.png)
 
 # Homework Challenges
 

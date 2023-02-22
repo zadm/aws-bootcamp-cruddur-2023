@@ -43,6 +43,7 @@ Notification feature added to the application
 
 ## Run DynamoDB Local Container and ensure it works
 
+## Local machine
 ### Create a table
 
 ![Cruddur local dynamo table](../_docs/assets/week1/Mongo-create-local-table.png)
@@ -53,17 +54,52 @@ Notification feature added to the application
 
 ### Create an Item
 
-[Item file](../backend-flask/dynamo_db/items.json)
+Please fine here the file used to create the item [Item file](../backend-flask/dynamo_db/items.json)
 
 ```bash
 aws dynamodb  batch-write-item  --endpoint-url http://localhost:8000  --request-items file://backend-flask/dynamo_db/items.json --return-consumed-capacity TOTAL  --profile bootcamp --no-cli-pager
 ```
 
-![List table](../_docs/assets/week1/create-item-cruddur-table.png)
+![Create item](../_docs/assets/week1/create-item-cruddur-table.png)
 
 ### List items
-
+```bash
+aws dynamodb scan  --endpoint-url http://localhost:8000 --table-name Cruddur --no-cli-pager
+```
 ![List items](../_docs/assets/week1/list-items.png)
+
+## Gitpod
+
+### Create a table
+
+```bash 
+aws dynamodb create-table  --endpoint-url http://localhost:8000  --table-name Cruddur --attribute-definitions AttributeName=UIID,AttributeType=S AttributeName=Handler,AttributeType=S  --key-schema AttributeName=UIID,KeyType=HASH AttributeName=Handler,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 --table-class STANDARD --no-cli-pager
+```
+![Gitpod create table](../_docs/assets/week1/gitpod-dynamodb-create-table.png)
+
+### List Tables
+```bash
+aws dynamodb list-tables --endpoint-url http://localhost:8000  --no-cli-pager
+```
+![Gitpo list table](../_docs/assets/week1/gitpod-dynamo-list-table.png)
+
+### Create an Item
+Please fine here the file used to create the item [Item file](../backend-flask/dynamo_db/items.json)
+
+```bash
+aws dynamodb  batch-write-item  --endpoint-url http://localhost:8000  --request-items file://backend-flask/dynamo_db/items.json --return-consumed-capacity TOTAL --no-cli-pager
+```
+
+![Gitpod create item](../_docs/assets/week1/gitpod-dynamo-create-item.png)
+
+### List items
+```bash
+aws dynamodb scan  --endpoint-url http://localhost:8000 --table-name Cruddur --no-cli-pager
+```
+![Gitpod list items](../_docs/assets/week1/gitpod-dynamo-list-items.png)
+
+## Postgre
+
 
 # Homework Challenges
 

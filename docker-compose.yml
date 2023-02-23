@@ -14,6 +14,8 @@ services:
     depends_on:
       - dynamodb-local
       - db
+    volumes:
+      - ./backend-flask:/backend-flask
 
   frontend-react-js:
     image: zk15xyz/cruddur-frontend:latest

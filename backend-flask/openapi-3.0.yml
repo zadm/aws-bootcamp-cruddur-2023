@@ -163,6 +163,15 @@ paths:
                type: array
                items:
                  $ref: '#/components/schemas/Activity'
+  /api/health:
+   get:
+     description: 'Return a health status'
+     tags:
+       - monitoring
+     parameters: []
+     responses:
+       '200':
+         description: Returns a status 200 code
 
 components:
   schemas:

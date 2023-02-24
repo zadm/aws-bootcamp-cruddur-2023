@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.9'
 
 services:
   backend-flask:
@@ -16,6 +16,11 @@ services:
       - db
     volumes:
       - ./backend-flask:/backend-flask
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:4567/api/health && echo 'OK' || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
 
   frontend-react-js:
     image: zk15xyz/cruddur-frontend:latest
@@ -29,7 +34,10 @@ services:
     volumes:
       - ./frontend-react-js:/frontend-react-js
     depends_on:
-      - backend-flask
+      backend-flask:
+        condition: service_healthy
+
+
   dynamodb-local:
     # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
     # We needed to add user:root to get this working.

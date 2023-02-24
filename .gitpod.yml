@@ -4,6 +4,9 @@ tasks:
     command: bash $GITPOD_REPO_ROOT/bash/configure_aws_with_gitpod.sh
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
+      FRONTEND_URL: "*"
+      BACKEND_URL: "*"
+      REACT_APP_BACKEND_URL: "https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
 
   - name: postgres
     command:  bash $GITPOD_REPO_ROOT/bash/install_postgre.sh

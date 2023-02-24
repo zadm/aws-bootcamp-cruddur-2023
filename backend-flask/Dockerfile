@@ -4,7 +4,6 @@ RUN python --version
 
 # Install required package 
 RUN git version
-EXPOSE 8080
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1

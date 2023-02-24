@@ -201,6 +201,54 @@ CMD ["./entrypoint.sh", "FLASK"]
 
 https://user-images.githubusercontent.com/18516249/221060787-149f66da-4959-426a-8a84-aae177d4fa63.mp4
 
+## Implement a healthcheck in the V3 Docker compose file
+
+
+1. Document health endpoint in the openapi file
+
+```yaml
+  /api/health:
+   get:
+     description: 'Return a health status'
+     tags:
+       - monitoring
+     parameters: []
+     responses:
+       '200':
+         description: Returns a status 200 code
+```
+2. Add health check endpoint in the backend app 
+
+```python
+@app.route("/api/health", methods=['GET'])
+def health():
+  data = { 'success': True, 'message': "healthy" }
+  return data, 200
+```
+
+3. Add the health check in the docker-compose
+
+```yaml
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:4567/api/health && echo 'OK' || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+```
+
+4. Configure the dependency in frontend service
+
+```yaml
+    depends_on:
+      backend-flask:
+        condition: service_healthy
+```
+
+If the health check fails, the application will stop running
+
+### Demo 
+
+
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
 

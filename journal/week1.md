@@ -247,9 +247,9 @@ def health():
 If the health check fails, the application will stop running
 
 ### Demo
-<!-- <video width="320" height="240" controls>
+<video width="320" height="240" controls>
   <source src="../_docs/assets/week1/docker-health-check.mp4" type="video/mp4">
-</video> -->
+</video>
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
 

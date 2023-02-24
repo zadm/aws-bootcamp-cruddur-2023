@@ -199,11 +199,7 @@ COPY config/gunicorn.conf.py  /etc/gunicorn.conf.py
 CMD ["./entrypoint.sh", "FLASK"]
 ```
 
-[![Video docker loca](../_docs/assets/week1/docker-local.png)]([](https://user-images.githubusercontent.com/18516249/221060787-149f66da-4959-426a-8a84-aae177d4fa63.mp4))
-
-
-https://user-images.githubusercontent.com/18516249/221060787-149f66da-4959-426a-8a84-aae177d4fa63.mp4
-
+[![Video docker loca]()]([](https://user-images.githubusercontent.com/18516249/221060787-149f66da-4959-426a-8a84-aae177d4fa63.mp4))
 
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile

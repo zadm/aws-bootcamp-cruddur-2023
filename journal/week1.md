@@ -247,9 +247,11 @@ def health():
 If the health check fails, the application will stop running
 
 ### Demo
-<video width="320" height="240" controls>
-  <source src="../_docs/assets/week1/docker-health-check.mp4" type="video/mp4">
-</video>
+<figure class="video_container">
+ <video controls="true" allowfullscreen="true">
+ <source src="../_docs/assets/week1/docker-health-check.mp4" type="video/mp4">
+ </video>
+</figure>
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
 
@@ -260,10 +262,6 @@ If the health check fails, the application will stop running
 ## Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
 
 1. Docker locally 
-
-<!-- ![Local docker](../_docs/assets/week1/docker-local.png) -->
-
-<!-- [Video docker local](https://user-images.githubusercontent.com/18516249/220197658-90488e0a-653e-48ec-964b-69215a9568a5.mov) -->
 
 https://user-images.githubusercontent.com/18516249/220201375-0b20206e-be26-479b-af17-704fd9a63a14.mp4
 

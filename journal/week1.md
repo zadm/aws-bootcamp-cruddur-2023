@@ -199,7 +199,7 @@ COPY config/gunicorn.conf.py  /etc/gunicorn.conf.py
 CMD ["./entrypoint.sh", "FLASK"]
 ```
 
-[![Video docker loca](../_docs/assets/week1/docker-multi-stage.png)]([../_docs/assets/week1/docker-local.png](https://user-images.githubusercontent.com/18516249/221060787-149f66da-4959-426a-8a84-aae177d4fa63.mp4))
+https://user-images.githubusercontent.com/18516249/221060787-149f66da-4959-426a-8a84-aae177d4fa63.mp4
 
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
@@ -215,9 +215,6 @@ CMD ["./entrypoint.sh", "FLASK"]
 <!-- ![Local docker](../_docs/assets/week1/docker-local.png) -->
 
 <!-- [Video docker local](https://user-images.githubusercontent.com/18516249/220197658-90488e0a-653e-48ec-964b-69215a9568a5.mov) -->
-
-[![Video docker loca](../_docs/assets/week1/docker-local.png)]([../_docs/assets/week1/docker-local.mp4](https://user-images.githubusercontent.com/18516249/220201375-0b20206e-be26-479b-af17-704fd9a63a14.mp4))
-
 
 https://user-images.githubusercontent.com/18516249/220201375-0b20206e-be26-479b-af17-704fd9a63a14.mp4
 

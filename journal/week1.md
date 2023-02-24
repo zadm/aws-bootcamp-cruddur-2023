@@ -255,6 +255,12 @@ https://user-images.githubusercontent.com/18516249/221273746-66ff216b-525e-4814-
 
 ## Launch an EC2 instance that has docker installed, and pull a container to demonstrate you can run your own docker processes. 
 
+### Create an instance 
+
+![AWS instance](../_docs/assets/week1/aws-instance.png)
+
+### Pull the created image from docker hub
+![AWS instance](../_docs/assets/week1/aws-pull-image.png)
 
 ## Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
 

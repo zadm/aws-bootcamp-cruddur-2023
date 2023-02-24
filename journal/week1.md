@@ -249,7 +249,8 @@ If the health check fails, the application will stop running
 ### Demo
 
 <video controls="controls">
-  <source type="video/mp4" src="../_docs/assets/week1/docker-health-check.mp4"></source>
+  <source type="video/mp4" src="https://user-images.githubusercontent.com/18516249/221273746-66ff216b-525e-4814-97b5-3f5040bbf595.mp4
+"></source>
   <p>Your browser does not support the video element.</p>
 </video>
 

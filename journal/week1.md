@@ -10,7 +10,7 @@ The application is running behind a gunicorn server [config file](../backend-fla
 
 ### Write the frontend docker file
 
-[Link to the backend docker file](../frontend-react-js/Dockerfile)
+[Link to the frontend docker file](../frontend-react-js/Dockerfile)
 
 ### Write the docker compose file
 [docker-compose](../docker-compose.yml)
@@ -146,6 +146,59 @@ docker pull zk15xyz/cruddur-frontend:latest
 
 ## Use multi-stage building for a Dockerfile build Implement a healthcheck in the V3 Docker compose file
 
+#### Frontend 
+
+```docker
+FROM node:16.18 AS base
+COPY . /frontend-react-js
+
+FROM base AS app
+WORKDIR /frontend-react-js
+RUN npm install
+
+FROM app As Prod
+CMD ["./entrypoint.sh", "NODE"]
+```
+#### Backend 
+
+```Docker
+# For more information, please refer to https://aka.ms/vscode-docker-python
+FROM python:3.10 AS base
+RUN python --version
+
+# Install required package 
+RUN git version
+EXPOSE 8080
+
+# Keeps Python from generating .pyc files in the container
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Turns off buffering for easier container logging
+ENV PYTHONUNBUFFERED=1
+
+# Install pip requirements
+COPY requirements.txt .
+RUN python -m pip install -r requirements.txt 
+
+
+FROM base AS app
+WORKDIR /app
+COPY . /app
+
+# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
+
+# Creates a non-root user with an explicit UID and adds permission to access the /app folder
+# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
+
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
+
+FROM app As Prod
+# RUN pip install .
+COPY config/gunicorn.conf.py  /etc/gunicorn.conf.py
+CMD ["./entrypoint.sh", "FLASK"]
+
+```
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
 

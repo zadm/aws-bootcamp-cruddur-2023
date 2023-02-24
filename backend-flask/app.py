@@ -71,6 +71,7 @@ def data_home():
 def data_notifications():
   data = NotificationsActivities.run()
   return data, 200
+
 @app.route("/api/activities/@<string:handle>", methods=['GET'])
 def data_handle(handle):
   model = UserActivities.run(handle)
@@ -118,6 +119,12 @@ def data_activities_reply(activity_uuid):
   else:
     return model['data'], 200
   return
+
+@app.route("/api/health", methods=['GET'])
+def health():
+  data = { 'success': True, 'message': "healthy" }
+  return data, 200
+
 
 if __name__ == "__main__":
   app.run(debug=True)

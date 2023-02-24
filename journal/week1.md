@@ -10,7 +10,7 @@ The application is running behind a gunicorn server [config file](../backend-fla
 
 ### Write the frontend docker file
 
-[Link to the backend docker file](../frontend-react-js/Dockerfile)
+[Link to the frontend docker file](../frontend-react-js/Dockerfile)
 
 ### Write the docker compose file
 [docker-compose](../docker-compose.yml)
@@ -146,23 +146,125 @@ docker pull zk15xyz/cruddur-frontend:latest
 
 ## Use multi-stage building for a Dockerfile build Implement a healthcheck in the V3 Docker compose file
 
+#### Frontend 
+
+```bash
+FROM node:16.18 AS base
+COPY . /frontend-react-js
+
+FROM base AS app
+WORKDIR /frontend-react-js
+RUN npm install
+
+FROM app As Prod
+CMD ["./entrypoint.sh", "NODE"]
+```
+#### Backend 
+
+```bash
+# For more information, please refer to https://aka.ms/vscode-docker-python
+FROM python:3.10 AS base
+RUN python --version
+
+# Install required package 
+RUN git version
+EXPOSE 8080
+
+# Keeps Python from generating .pyc files in the container
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Turns off buffering for easier container logging
+ENV PYTHONUNBUFFERED=1
+
+# Install pip requirements
+COPY requirements.txt .
+RUN python -m pip install -r requirements.txt 
+
+
+FROM base AS app
+WORKDIR /app
+COPY . /app
+
+# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
+
+# Creates a non-root user with an explicit UID and adds permission to access the /app folder
+# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
+
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
+
+FROM app As Prod
+# RUN pip install .
+COPY config/gunicorn.conf.py  /etc/gunicorn.conf.py
+CMD ["./entrypoint.sh", "FLASK"]
+```
+Demo 
+
+https://user-images.githubusercontent.com/18516249/221060787-149f66da-4959-426a-8a84-aae177d4fa63.mp4
+
+## Implement a healthcheck in the V3 Docker compose file
+
+
+1. Document health endpoint in the openapi file
+
+```yaml
+  /api/health:
+   get:
+     description: 'Return a health status'
+     tags:
+       - monitoring
+     parameters: []
+     responses:
+       '200':
+         description: Returns a status 200 code
+```
+2. Add health check endpoint in the backend app 
+
+```python
+@app.route("/api/health", methods=['GET'])
+def health():
+  data = { 'success': True, 'message': "healthy" }
+  return data, 200
+```
+
+3. Add the health check in the docker-compose
+
+```yaml
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:4567/api/health && echo 'OK' || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+```
+
+4. Configure the dependency in frontend service
+
+```yaml
+    depends_on:
+      backend-flask:
+        condition: service_healthy
+```
+
+If the health check fails, the application will stop running
+
+### Demo
+https://user-images.githubusercontent.com/18516249/221273746-66ff216b-525e-4814-97b5-3f5040bbf595.mp4
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
 
 
 ## Launch an EC2 instance that has docker installed, and pull a container to demonstrate you can run your own docker processes. 
 
+### Create an instance 
+
+![AWS instance](../_docs/assets/week1/aws-instance.png)
+
+### Pull the created image from docker hub
+![AWS instance](../_docs/assets/week1/aws-pull-image.png)
 
 ## Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
 
 1. Docker locally 
-
-<!-- ![Local docker](../_docs/assets/week1/docker-local.png) -->
-
-<!-- [Video docker local](https://user-images.githubusercontent.com/18516249/220197658-90488e0a-653e-48ec-964b-69215a9568a5.mov) -->
-
-[![Video docker loca](../_docs/assets/week1/docker-local.png)]([../_docs/assets/week1/docker-local.mp4](https://user-images.githubusercontent.com/18516249/220201375-0b20206e-be26-479b-af17-704fd9a63a14.mp4))
-
 
 https://user-images.githubusercontent.com/18516249/220201375-0b20206e-be26-479b-af17-704fd9a63a14.mp4
 

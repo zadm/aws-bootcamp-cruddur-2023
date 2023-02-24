@@ -247,11 +247,12 @@ def health():
 If the health check fails, the application will stop running
 
 ### Demo
-<figure class="video_container">
- <video controls="true" allowfullscreen="true">
- <source src="../_docs/assets/week1/docker-health-check.mp4" type="video/mp4">
- </video>
-</figure>
+
+<video controls="controls">
+  <source type="video/mp4" src="../_docs/assets/week1/docker-health-check.mp4"></source>
+  <p>Your browser does not support the video element.</p>
+</video>
+
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
 

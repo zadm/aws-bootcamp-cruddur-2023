@@ -148,7 +148,7 @@ docker pull zk15xyz/cruddur-frontend:latest
 
 #### Frontend 
 
-```docker
+```bash
 FROM node:16.18 AS base
 COPY . /frontend-react-js
 
@@ -161,7 +161,7 @@ CMD ["./entrypoint.sh", "NODE"]
 ```
 #### Backend 
 
-```Docker
+```bash
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.10 AS base
 RUN python --version
@@ -197,8 +197,14 @@ FROM app As Prod
 # RUN pip install .
 COPY config/gunicorn.conf.py  /etc/gunicorn.conf.py
 CMD ["./entrypoint.sh", "FLASK"]
-
 ```
+
+[![Video docker loca](../_docs/assets/week1/docker-local.png)]([](https://user-images.githubusercontent.com/18516249/221060787-149f66da-4959-426a-8a84-aae177d4fa63.mp4))
+
+
+https://user-images.githubusercontent.com/18516249/221060787-149f66da-4959-426a-8a84-aae177d4fa63.mp4
+
+
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
 

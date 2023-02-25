@@ -1,18 +1,38 @@
-name: publish
-on: [push]
+name: ci
+
+on:
+  push:
+    branches:
+      - 'main'
+
 jobs:
-publish-cruddur-docker-image:
-runs-on: ubuntu-latest
-steps:
-- uses: actions/checkout@v2
-- name: Login to GitHub Container Registry
-uses: docker/login-action@v1
-with:
-registry: docker.io
-username: zk15xyz
-password: ${{ secrets.DOCKER_HUB }}
-- name: Build cruddur images
-run: |
-       docker-compose build
-       zk15xyz/cruddur-backend:latest
-       zk15xyz/cruddur-frontend:latest
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          ecr: false
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - 
+        name: build image
+        run: docker-compose up
+
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: "{{defaultContext}}:backend-flask/"
+          file: backend-flask/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/cruddur-backend:latest

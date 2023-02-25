@@ -272,3 +272,8 @@ https://user-images.githubusercontent.com/18516249/220201375-0b20206e-be26-479b-
 1. Cruddur locally
 
 ![Local docker](../_docs/assets/week1/cruddur-local.png)
+
+## Add synk integration
+
+Scan the project by synk
+![Synk](../_docs/assets/week1/synk-integration.png)

@@ -29,3 +29,4 @@ function export_variables(){
     export BACKEND_URL="*"
     export REACT_APP_BACKEND_URL="https://4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
 }
+set +x

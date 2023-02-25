@@ -1,19 +1,16 @@
 
 tasks:
 
-  - name: source bootsrap script
-    command: bash source $GITPOD_REPO_ROOT/bash/bootstrap_gitpod.sh
-
   - name: Initialize & Configure AWS
-    command: bash configure_aws_with_gitpod
+    command: source $GITPOD_REPO_ROOT/bash/bootstrap_gitpod.sh && configure_aws_with_gitpod
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
 
   - name: postgres
-    command: install_postgre
+    command: source $GITPOD_REPO_ROOT/bash/bootstrap_gitpod.sh && install_postgre
 
   - name: export variable
-    command: export_variables
+    command: source $GITPOD_REPO_ROOT/bash/bootstrap_gitpod.sh && export_variables
 
 vscode:
   extensions:

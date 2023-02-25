@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'main'
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,9 +28,16 @@ jobs:
         run: docker-compose build
 
       -
-        name: Build and push
+        name: Build and push Backend
         uses: docker/build-push-action@v4
         with:
           context: "./backend-flask"
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/cruddur-backend:latest
+      -
+        name: Build and push Frontend
+        uses: docker/build-push-action@v4
+        with:
+          context: "./frontend-react-js"
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/cruddur-backend:latest

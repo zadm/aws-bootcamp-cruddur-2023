@@ -288,5 +288,7 @@ Scan the project by synk
 
 ## Github action 
 
+[Build stage github action file](../.github/workflows/publish.yml)
+
 ![Github action](../_docs/assets/week1/github_action.png)
 

@@ -251,7 +251,14 @@ If the health check fails, the application will stop running
 https://user-images.githubusercontent.com/18516249/221273746-66ff216b-525e-4814-97b5-3f5040bbf595.mp4
 
 ## Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
-
+1. Create separate Dockerfile for production and dev 
+2. Use a destroless base image to avoid unused library and improve the vulnerabilities
+3. Builder images (multi-stage builds)
+4. Use read only file system in the docker image
+5. Reduce layers 
+6. Add dockerignore file to avoid pushing unused file
+7. Run Docker in rootless Mode
+8. Avoid using the ` — privileged` flag
 
 ## Launch an EC2 instance that has docker installed, and pull a container to demonstrate you can run your own docker processes. 
 

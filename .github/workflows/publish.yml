@@ -22,10 +22,6 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      
-      - 
-        name: build image
-        run: docker-compose build
 
       -
         name: Build and push Backend

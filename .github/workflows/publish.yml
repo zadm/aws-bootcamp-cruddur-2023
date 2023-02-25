@@ -25,9 +25,9 @@ jobs:
         uses: docker/setup-buildx-action@v2
       
       - 
-        name: debug
-        run: "ls -all *"
-        
+        name: build image
+        run: docker-compose up
+
       -
         name: Build and push
         uses: docker/build-push-action@v4

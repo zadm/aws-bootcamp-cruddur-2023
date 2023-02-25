@@ -12,6 +12,11 @@ tasks:
   - name: export variable
     command: source $GITPOD_REPO_ROOT/bash/bootstrap_gitpod.sh && export_variables
 
+  - name: Docker expose
+    init: |
+      source $GITPOD_REPO_ROOT/bash/bootstrap_gitpod.sh && export_variables
+    command: run
+
 vscode:
   extensions:
     - 42Crunch.vscode-openapi

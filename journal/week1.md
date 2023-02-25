@@ -284,3 +284,9 @@ https://user-images.githubusercontent.com/18516249/220201375-0b20206e-be26-479b-
 
 Scan the project by synk
 ![Synk](../_docs/assets/week1/synk-integration.png)
+
+
+## Github action 
+
+![Github action](../_docs/assets/week1/github_action.png)
+

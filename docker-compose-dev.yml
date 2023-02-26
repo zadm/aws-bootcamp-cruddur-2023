@@ -1,8 +1,8 @@
-version: '3.4'
+version: '3.9'
 
 services:
   backend-flask:
-    image: zk15.xyz/aws-bootcamp/backend-flask:latest
+    image: zk15xyz/cruddur-backend:latest
     build:
       context: backend-flask/
       dockerfile: Dockerfile
@@ -10,9 +10,20 @@ services:
       - FRONTEND_URL=${FRONTEND_URL}
       - BACKEN_URL=${BACKEND_URL}
     ports:
-      - 8080:8080
+      - 4567:4567
+    depends_on:
+      - dynamodb-local
+      - db
+    volumes:
+      - ./backend-flask:/backend-flask
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:4567/api/health && echo 'OK' || exit 1"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+
   frontend-react-js:
-    image: zk15.xyz/aws-bootcamp/frontend-react-js:latest
+    image: zk15xyz/cruddur-frontend:latest
     build:
       context: frontend-react-js/
       dockerfile: Dockerfile
@@ -23,6 +34,37 @@ services:
     volumes:
       - ./frontend-react-js:/frontend-react-js
     depends_on:
-      - backend-flask
-  # redis:
-  #   image: redis
+      backend-flask:
+        condition: service_healthy
+
+
+  dynamodb-local:
+    # https://stackoverflow.com/questions/67533058/persist-local-dynamodb-data-in-volumes-lack-permission-unable-to-open-databa
+    # We needed to add user:root to get this working.
+    user: root
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+  db:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+
+networks: 
+  internal-network:
+    driver: bridge
+    name: cruddur
+volumes:
+  db:
+    driver: local

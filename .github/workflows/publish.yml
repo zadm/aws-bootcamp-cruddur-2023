@@ -37,7 +37,3 @@ jobs:
           context: "./frontend-react-js"
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/cruddur-frontend:latest
-          platforms: |
-            linux/amd64
-            linux/arm64
-            linux/arm/v7

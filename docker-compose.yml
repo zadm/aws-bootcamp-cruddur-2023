@@ -9,6 +9,10 @@ services:
     environment:
       - FRONTEND_URL=${FRONTEND_URL}
       - BACKEN_URL=${BACKEND_URL}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
+      - HONEYCOMB_API_KEY=${HONEYCOMB_API_KEY}
+      - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=${HONEYCOMB_API_KEY}
+      - OTEL_SERVICE_NAME=cruddur-backend
     ports:
       - 4567:4567
     depends_on:
@@ -18,7 +22,7 @@ services:
       - ./backend-flask:/backend-flask
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://127.0.0.1:4567/api/health && echo 'OK' || exit 1"]
-      interval: 5s
+      interval: 20s
       timeout: 2s
       retries: 3
 
@@ -29,6 +33,9 @@ services:
       dockerfile: Dockerfile
     environment:
       - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+      - OTEL_SERVICE_NAME= "cruddur-front"
+      - HONEYCOMB_API_KEY=${HONEYCOMB_API_KEY}
+      - OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io"
     ports:
       - 3000:3000
     volumes:

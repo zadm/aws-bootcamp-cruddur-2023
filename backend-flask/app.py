@@ -14,8 +14,8 @@ from services.create_message import *
 from services.show_activity import *
 from services.notifications_activities import *
 
+from services.tracing.honycomb import app
 
-app = Flask(__name__)
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
 origins = [frontend, backend]

@@ -269,6 +269,15 @@ https://user-images.githubusercontent.com/18516249/221273746-66ff216b-525e-4814-
 ### Pull the created image from docker hub
 ![AWS instance](../_docs/assets/week1/aws-pull-image.png)
 
+### Run cruddur in the EC2 
+I didn't uplaod my projet to the instance, I only uploaded the dockerFile and remove the volume part and execute the docker-compose up
+
+![Cruddur in EC2](../_docs/assets/week1/ec2-cruddur.png)
+
+![IP EC2](../_docs/assets/week1/ec2-proof-ip.png)
+
+![SG](../_docs/assets/week1/ec2-SG-proof.png)
+
 ## Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
 
 1. Docker locally 

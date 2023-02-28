@@ -3,6 +3,7 @@ from flask import request
 from flask_cors import CORS, cross_origin
 import os
 
+
 from services.home_activities import *
 from services.user_activities import *
 from services.create_activity import *
@@ -14,10 +15,15 @@ from services.create_message import *
 from services.show_activity import *
 from services.notifications_activities import *
 
-from services.tracing.honycomb import app
+from services.tracing.honycomb import init_honycomb
 
 frontend = os.getenv("FRONTEND_URL")
 backend = os.getenv("BACKEND_URL")
+app = Flask(__name__)
+
+# init honeyciomb
+init_honycomb(app)
+
 origins = [frontend, backend]
 cors = CORS(
     app,

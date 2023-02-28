@@ -32,3 +32,9 @@
 ## Query where app.received.date exists
 
 ![](../_docs/assets/week2/honeycomb-where-attribute-exist.png)
+
+## Honeycomb trace from gitpod
+![](../_docs/assets/week2/honeycomb-gitpod.png)
+
+
+

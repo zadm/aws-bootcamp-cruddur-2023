@@ -1,6 +1,8 @@
 flask
 flask-cors
 gunicorn
+
+# honeycomb
 opentelemetry-api==1.16.0
 opentelemetry-exporter-otlp-proto-http==1.16.0
 opentelemetry-instrumentation==0.37b0
@@ -11,3 +13,6 @@ opentelemetry-proto==1.16.0
 opentelemetry-sdk==1.16.0
 opentelemetry-semantic-conventions==0.37b0
 opentelemetry-util-http==0.37b
+
+# aws x-ray
+aws-xray-sdk==2.11.0

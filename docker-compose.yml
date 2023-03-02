@@ -7,13 +7,18 @@ services:
       context: backend-flask/
       dockerfile: Dockerfile
     environment:
-      - FRONTEND_URL=${FRONTEND_URL}
-      - BACKEN_URL=${BACKEND_URL}
-      - OTEL_EXPORTER_OTLP_ENDPOINT=https://api.honeycomb.io
-      - HONEYCOMB_API_KEY=${HONEYCOMB_API_KEY}
-      - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=${HONEYCOMB_API_KEY}
-      - OTEL_SERVICE_NAME=cruddur-backend
-      - AWS_XRAY_DAEMON_ADDRESS=${AWS_XRAY_DAEMON_ADDRESS}
+      FRONTEND_URL: ${FRONTEND_URL}
+      BACKEN_URL: ${BACKEND_URL}
+      OTEL_EXPORTER_OTLP_ENDPOINT: https://api.honeycomb.io
+      HONEYCOMB_API_KEY: ${HONEYCOMB_API_KEY}
+      OTEL_EXPORTER_OTLP_HEADERS: x-honeycomb-team=${HONEYCOMB_API_KEY}
+      AWS_XRAY_DAEMON_ADDRESS: ${AWS_XRAY_DAEMON_ADDRESS}
+      OTEL_SERVICE_NAME: cruddur-backend
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_REGION}
+      ENABLE_CLOUD_WATCH_LOG: True
+      AWS_XRAY_SDK_ENABLED: False
     ports:
       - 4567:4567
     depends_on:
@@ -34,10 +39,10 @@ services:
       context: frontend-react-js/
       dockerfile: Dockerfile
     environment:
-      - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
-      - OTEL_SERVICE_NAME= "cruddur-front"
-      - HONEYCOMB_API_KEY=${HONEYCOMB_API_KEY}
-      - OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io"
+      REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL}
+      OTEL_SERVICE_NAME: cruddur-front
+      HONEYCOMB_API_KEY: ${HONEYCOMB_API_KEY}
+      OTEL_EXPORTER_OTLP_ENDPOINT: https://api.honeycomb.io
     ports:
       - 3000:3000
     volumes:

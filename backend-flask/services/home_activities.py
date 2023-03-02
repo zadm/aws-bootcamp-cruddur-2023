@@ -9,6 +9,12 @@ from aws_xray_sdk.core import xray_recorder
 
 tracer = trace.get_tracer("api.home.activities")
 
+# Logging
+
+import logging
+
+logger = logging.getLogger("cruddur")
+
 class HomeActivities:
     @tracer.start_as_current_span("api.home.activities.run")
     def run():
@@ -60,4 +66,5 @@ class HomeActivities:
             ]
             span.set_attribute("app.result_length", len(results))
             subsegment.put_metadata("app.result_length", len(results));
+        logger.debug(f"Home activities result: {results}")
         return results

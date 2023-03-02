@@ -18,15 +18,22 @@ from services.notifications_activities import *
 from services.tracing.honycomb import init_honycomb
 from services.tracing.aws_xray import init_xray
 
+import logging
+from services.logging.logger import setup_logger
+setup_logger()
+
+logger = logging.getLogger("cruddur")
+
 frontend = os.getenv("FRONTEND_URL")
 backend = os.getenv("BACKEND_URL")
 app = Flask(__name__)
 
-# instrument with  honeyciomb
-init_honycomb(app)
+# instrument with  honeycomb
+init_honycomb(app) 
 
 # instrument with xray
 init_xray(app)
+
 
 origins = [frontend, backend]
 cors = CORS(
@@ -39,6 +46,7 @@ cors = CORS(
 
 @app.route("/api/message_groups", methods=["GET"])
 def data_message_groups():
+    logger.info("message group request is received")
     user_handle = "andrewbrown"
     model = MessageGroups.run(user_handle=user_handle)
     if model["errors"] is not None:
@@ -148,6 +156,7 @@ def data_activities_reply(activity_uuid):
 
 @app.route("/api/health", methods=["GET"])
 def health():
+    logger.info("health request is received")
     data = {"success": True, "message": "healthy"}
     return data, 200
 

@@ -16,3 +16,6 @@ opentelemetry-util-http==0.37b
 
 # aws x-ray
 aws-xray-sdk==2.11.0
+
+# CloudWath
+watchtower==3.0.1

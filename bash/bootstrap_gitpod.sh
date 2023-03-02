@@ -29,11 +29,8 @@ function export_variables() {
     export HONEYCOMB_API_KEY=${HONEYCOMB_API_KEY}
     export OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=${HONEYCOMB_API_KEY}"
     export OTEL_SERVICE_NAME="cruddur-backend"
-    export AWS_XRAY_URL: "*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
-    export AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
+    export AWS_XRAY_URL="*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
     export AWS_REGION="eu-west-1"
-    export AWS_XRAY_SDK_ENABLED="False"
-    export ENABLE_CLOUD_WATCH_LOG="False"
 
 
 

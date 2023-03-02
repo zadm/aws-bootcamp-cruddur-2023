@@ -87,3 +87,48 @@ I managed to instrument this method with both xray and honneycomb, like that the
 ![](../_docs/assets/week2/aws-xray-subsegment-image.png)
 
 ![](../_docs/assets/week2/aws-xray-subsegment-raw.png)
+
+# Install WatchTower and write a custom logger to send application log data to CloudWatch Log group
+
+### Python module to setup logging
+
+[logging](../backend-flask/services/logging/logger.py)
+
+In python you can get a logger at any point by instanciating the Logger class from logging module by passing the name of the logger 
+
+The [logging](../backend-flask/services/logging/logger.py) method settup cruddur logger for the application. The cloud watch is enabled by setting the env variable ENABLE_CLOUD_WATCH_LOG
+
+```bash 
+export ENABLE_CLOUD_WATCH_LOG="False"
+```
+
+The function will load the variable if defined and enable the cloudwatch. If this variable is absent, only console log is enbaled
+
+The function `setup_logger` is called one time at the init of the application
+
+in app.py
+```python 
+from services.logging.logger import setup_logger
+setup_logger()
+```
+Now, at any point in your application, you can get cruddur logger with the bellow code 
+
+```python
+import logging
+logger = logging.getLogger("cruddur")
+logger.info("INFO")
+```
+### proof
+
+aws cloud watch group
+![](../_docs/assets/week2/aws-cloudwatch-log-proof.png)
+
+aws docker-compose flask service logs
+![](../_docs/assets/week2/aws-cloudwatch-console-log.png)
+
+
+
+
+
+
+

@@ -13,11 +13,13 @@ services:
       - HONEYCOMB_API_KEY=${HONEYCOMB_API_KEY}
       - OTEL_EXPORTER_OTLP_HEADERS=x-honeycomb-team=${HONEYCOMB_API_KEY}
       - OTEL_SERVICE_NAME=cruddur-backend
+      - AWS_XRAY_DAEMON_ADDRESS=${AWS_XRAY_DAEMON_ADDRESS}
     ports:
       - 4567:4567
     depends_on:
       - dynamodb-local
       - db
+      - xray-daemon
     volumes:
       - ./backend-flask:/backend-flask
     healthcheck:
@@ -67,6 +69,17 @@ services:
       - '5432:5432'
     volumes: 
       - db:/var/lib/postgresql/data
+
+  xray-daemon:
+    image: "amazon/aws-xray-daemon"
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: eu-west-1
+    command:
+      - "xray --log-level debug -o -b xray-daemon:2000"
+    ports:
+      - 2000:2000/udp
 
 networks: 
   internal-network:

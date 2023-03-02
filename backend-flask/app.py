@@ -16,13 +16,17 @@ from services.show_activity import *
 from services.notifications_activities import *
 
 from services.tracing.honycomb import init_honycomb
+from services.tracing.aws_xray import init_xray
 
 frontend = os.getenv("FRONTEND_URL")
 backend = os.getenv("BACKEND_URL")
 app = Flask(__name__)
 
-# init honeyciomb
+# instrument with  honeyciomb
 init_honycomb(app)
+
+# instrument with xray
+init_xray(app)
 
 origins = [frontend, backend]
 cors = CORS(

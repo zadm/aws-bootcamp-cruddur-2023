@@ -6,7 +6,7 @@ from flask import got_request_exception
 import os
 def init_rollbar(app: Flask):
     rollbar.init(
-    access_token=os.getenv("ROLLBAR_API_KEY"),
+    access_token=os.getenv("ROLLBAR_ACCESS_TOKEN"),
     environment='cruddur flask',
     root=os.path.dirname(os.path.realpath(__file__)),
     code_version='1.0',

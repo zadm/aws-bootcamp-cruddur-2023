@@ -128,7 +128,19 @@ aws docker-compose flask service logs
 
 # Trigger an error an observe an error with Rollbar
 
+The module managing rollbar logging is [here](../backend-flask/services/logging/rollbar.py)
+sending log to rollbar is controlled by the env variable `ENABLE_ROLLBAR_LOG`
+
+### Gitpod
+1. Add `ROLLBAR_ACCESS_TOKEN: <TOCKEN>` in you gitpod env variables
+2. Add `ENABLE_ROLLBAR_LOG: True` in you gitpod env variables or in  [bootsrap_gitpod](../bash/bootstrap_gitpod.sh#L24-34)
+3. Launch the repo in gitpod
+4. try access to `BACKEND_URL/rollbar`
+
+### Proof of work
 https://user-images.githubusercontent.com/116020237/222786459-401c5f36-3412-41f5-a72b-e0176e9585ee.mp4
+
+
 
 
 

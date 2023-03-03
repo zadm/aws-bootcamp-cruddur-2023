@@ -39,7 +39,8 @@ init_honycomb(app)
 init_xray(app)
 
 # init rollbar
-init_rollbar(app)
+if os.getenv("ENABLE_ROLLBAR_LOG") and os.getenv("ENABLE_ROLLBAR_LOG").lower() == "true":
+    init_rollbar(app)
 
 origins = [frontend, backend]
 cors = CORS(

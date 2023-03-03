@@ -1,0 +1,15 @@
+repos:
+- repo: https://github.com/gruntwork-io/pre-commit
+  rev: v0.1.18 # Get the latest from: https://github.com/gruntwork-io/pre-commit/releases
+  hooks:
+    - id: terraform-fmt
+    - id: tflint
+      args:
+        - "--config=terraform/backend-app/.tflint.hcl"
+    - id: terraform-validate
+# - repo: git://github.com/antonbabenko/pre-commit-terraform
+#   rev: 1.77.1 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+#   hooks:
+#     - id: terraform_tfsec
+#     - id: terraform_docs
+#     - id: checkov

@@ -1,11 +1,11 @@
-resource "aws_xray_group" "group" {  
-    group_name = "${var.environment}-${var.group_name}"
-    filter_expression = "service(\"${var.react_app_backend_url}\") {fault OR error}"
-    tags = {
-        "application_name": "cruddur",
-        "owner": "zk15.xyz",
-        "environment": "production"
-    }
+resource "aws_xray_group" "group" {
+  group_name        = "${var.environment}-${var.group_name}"
+  filter_expression = "service(\"${var.react_app_backend_url}\") {fault OR error}"
+  tags = {
+    "application_name" : "cruddur",
+    "owner" : "zk15.xyz",
+    "environment" : "production"
+  }
 }
 
 resource "aws_xray_sampling_rule" "simple_rule" {
@@ -20,8 +20,4 @@ resource "aws_xray_sampling_rule" "simple_rule" {
   service_type   = "*"
   service_name   = "Cruddur"
   resource_arn   = "*"
-
-#   attributes = {
-#     Hello = "Tris"
-#   }
 }

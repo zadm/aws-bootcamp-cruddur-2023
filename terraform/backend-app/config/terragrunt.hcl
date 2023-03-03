@@ -5,8 +5,7 @@ locals {
   project_name         = "cruddur-backend"
   account_name         = "bootcamp"
   app_version          = get_env("PACKAGE_VERSION", "0.0.0")
-#   docker_image_service = get_env("DOCKER_IMAGE_SERVICE", "repository.betclic.net/offeringprovider-derivatedmarkets-service:stable")
-#   docker_image_worker  = get_env("DOCKER_IMAGE_WORKER", "repository.betclic.net/offeringprovider-derivatedmarkets-worker:stable")
+
 }
 
 remote_state {

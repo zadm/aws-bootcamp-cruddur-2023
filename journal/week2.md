@@ -126,6 +126,9 @@ aws cloud watch group
 aws docker-compose flask service logs
 ![](../_docs/assets/week2/aws-cloudwatch-console-log.png)
 
+# Trigger an error an observe an error with Rollbar
+
+
 
 
 

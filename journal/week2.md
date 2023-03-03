@@ -126,7 +126,7 @@ aws cloud watch group
 aws docker-compose flask service logs
 ![](../_docs/assets/week2/aws-cloudwatch-console-log.png)
 
-# Trigger an error an observe an error with Rollbar
+# Integrate Rollbar for Error Logging
 
 The module managing rollbar logging is [here](../backend-flask/services/logging/rollbar.py)
 sending log to rollbar is controlled by the env variable `ENABLE_ROLLBAR_LOG`
@@ -137,7 +137,7 @@ sending log to rollbar is controlled by the env variable `ENABLE_ROLLBAR_LOG`
 3. Launch the repo in gitpod
 4. try access to `BACKEND_URL/rollbar`
 
-### Proof of work
+# Trigger an error an observe an error with Rollbar
 https://user-images.githubusercontent.com/116020237/222786459-401c5f36-3412-41f5-a72b-e0176e9585ee.mp4
 
 

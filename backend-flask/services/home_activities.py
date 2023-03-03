@@ -6,11 +6,10 @@ from opentelemetry import trace
 # aws xray
 from aws_xray_sdk.core import xray_recorder
 
-
+# Honeycomb
 tracer = trace.get_tracer("api.home.activities")
 
 # Logging
-
 import logging
 
 logger = logging.getLogger("cruddur")

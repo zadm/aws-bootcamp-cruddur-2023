@@ -22,6 +22,10 @@ import logging
 from services.logging.logger import setup_logger
 setup_logger()
 
+# Rollbar
+from services.logging.rollbar import init_rollbar
+
+
 logger = logging.getLogger("cruddur")
 
 frontend = os.getenv("FRONTEND_URL")
@@ -34,6 +38,8 @@ init_honycomb(app)
 # instrument with xray
 init_xray(app)
 
+# init rollbar
+init_rollbar(app)
 
 origins = [frontend, backend]
 cors = CORS(
@@ -160,6 +166,12 @@ def health():
     data = {"success": True, "message": "healthy"}
     return data, 200
 
+@app.route('/rollbar')
+def hello():
+    print("in hello")
+    x = None
+    x[5]
+    return "Hello World!"
 
 if __name__ == "__main__":
     app.run(debug=True)

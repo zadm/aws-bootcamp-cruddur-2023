@@ -19,6 +19,7 @@ services:
       AWS_DEFAULT_REGION: ${AWS_REGION}
       ENABLE_CLOUD_WATCH_LOG: False
       AWS_XRAY_SDK_ENABLED: False
+      ROLLBAR_API_KEY: ${ROLLBAR_API_KEY}
     ports:
       - 4567:4567
     depends_on:

@@ -128,7 +128,7 @@ aws docker-compose flask service logs
 
 # Trigger an error an observe an error with Rollbar
 
-
+https://user-images.githubusercontent.com/116020237/222786459-401c5f36-3412-41f5-a72b-e0176e9585ee.mp4
 
 
 

@@ -1,0 +1,30 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        cors:
+          allowed_origins:
+            - http://*
+            - https://*
+            # Origins can have wildcards with *, use * by itself to match any origin.
+          allowed_headers:
+            - "*"
+          max_age: 7200
+
+processors:
+  batch:
+
+exporters:
+  otlp:
+    endpoint: "api.honeycomb.io:443"
+    headers:
+      "x-honeycomb-team": "${HONEYCOMB_API_KEY}"
+      # "x-honeycomb-dataset": "cruddur-frontend"
+  logging:
+    loglevel: debug
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp,logging]

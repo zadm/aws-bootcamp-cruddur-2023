@@ -45,13 +45,15 @@ services:
       OTEL_SERVICE_NAME: cruddur-front
       HONEYCOMB_API_KEY: ${HONEYCOMB_API_KEY}
       OTEL_EXPORTER_OTLP_ENDPOINT: https://api.honeycomb.io
+      REACT_APP_OTEL_COLLECTOR_ENDPOINT: ${REACT_APP_OTEL_COLLECTOR_ENDPOINT}
+
     ports:
       - 3000:3000
     volumes:
       - ./frontend-react-js:/frontend-react-js
     depends_on:
-      backend-flask:
-        condition: service_healthy
+      - backend-flask
+      - otel-collector
 
 
   dynamodb-local:
@@ -87,6 +89,18 @@ services:
       - "xray --log-level debug -o -b xray-daemon:2000"
     ports:
       - 2000:2000/udp
+
+  otel-collector:
+    environment:
+      HONEYCOMB_API_KEY: "${HONEYCOMB_API_KEY}"
+    image: "otel/opentelemetry-collector"
+    command: ["--config=/etc/otel-collector-config.yml"]
+
+    volumes:
+      - ./frontend-react-js/otel-collector-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - 4318:4318   # pprof extension
+
 
 networks: 
   internal-network:

@@ -31,6 +31,8 @@ function export_variables() {
     export OTEL_SERVICE_NAME="cruddur-backend"
     export AWS_XRAY_URL="*4567-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}*"
     export AWS_REGION="eu-west-1"
+    export REACT_APP_OTEL_COLLECTOR_ENDPOINT="https://4318-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+
 
 
 

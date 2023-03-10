@@ -11,27 +11,28 @@ export default function RecoverPage() {
   const [password, setPassword] = React.useState('');
   const [passwordAgain, setPasswordAgain] = React.useState('');
   const [code, setCode] = React.useState('');
-  const [errors, setCognitoErrors] = React.useState('');
+  const [errors, setErrors] = React.useState('');
+
   const [formState, setFormState] = React.useState('send_code');
 
 
   const onsubmit_send_code = async (event) => {
     event.preventDefault();
-    setCognitoErrors('')
+    setErrors('')
     Auth.forgotPassword(username)
     .then((data) => setFormState('confirm_code') )
-    .catch((err) => setCognitoErrors(err.message) );
+    .catch((err) => setErrors(err.message) );
     return false
   }
   const onsubmit_confirm_code = async (event) => {
     event.preventDefault();
-    setCognitoErrors('')
+    setErrors('')
     if (password == passwordAgain){
       Auth.forgotPasswordSubmit(username, code, password)
       .then((data) => setFormState('success'))
-      .catch((err) => setCognitoErrors(err.message) );
+      .catch((err) => setErrors(err.message) );
     } else {
-      setCognitoErrors('Passwords do not match')
+      setErrors('Passwords do not match')
     }
     return false
   }

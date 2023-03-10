@@ -2,7 +2,7 @@ locals {
   default_yaml_path    = find_in_parent_folders("root.yml")
   aws_region           = "eu-west-1"
   environment          = get_env("TF_VAR_ENV", "dev") # "dev" by default to avoid mistakes when developping locally
-  project_name         = "cruddur-backend"
+  project_name         = "cruddur"
   account_name         = "bootcamp"
   app_version          = get_env("PACKAGE_VERSION", "0.0.0")
 
@@ -10,6 +10,10 @@ locals {
 
 remote_state {
   backend = "s3"
+    generate = {
+    path      = "backend.tf"
+    if_exists = "overwrite"
+  }
   config = {
     bucket                = "${local.account_name}-${local.environment}-tfstates-bucket"
     key                   = "${local.project_name}/${path_relative_to_include()}/terraform.tfstate"

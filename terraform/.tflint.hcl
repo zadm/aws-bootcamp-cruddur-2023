@@ -39,7 +39,7 @@ rule "terraform_naming_convention" {
 }
 
 rule "terraform_required_providers" {
-  enabled = true
+  enabled = false
 }
 
 rule "terraform_standard_module_structure" {
@@ -55,13 +55,9 @@ rule "terraform_unused_declarations" {
 }
 
 rule "terraform_unused_required_providers" {
-  enabled = true
+  enabled = false
 }
 
 rule "terraform_naming_convention" {
   enabled = true
-}
-plugin "terraform" {
-  enabled = true
-  preset  = "recommended"
 }

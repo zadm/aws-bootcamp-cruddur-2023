@@ -26,7 +26,7 @@ export default function SignupPage() {
     console.log('name',name)
     try {
       const { user } = await Auth.signUp({
-        username: username,
+        username: email,
         password: password,
         attributes: {
           name: name,

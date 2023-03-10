@@ -5,7 +5,7 @@ resource "aws_cognito_user_pool" "cruddur_user_pool" {
   #   "email",
   # ]
 
-  # username_attributes = ["email", "username"]
+  username_attributes = ["email", "user_name"]
   auto_verified_attributes = ["email"]
   password_policy {
     minimum_length = 6
@@ -37,7 +37,7 @@ resource "aws_cognito_user_pool" "cruddur_user_pool" {
     attribute_data_type      = "String"
     developer_only_attribute = false
     mutable                  = true
-    name                     = "username"
+    name                     = "name"
     required                 = true
 
     string_attribute_constraints {

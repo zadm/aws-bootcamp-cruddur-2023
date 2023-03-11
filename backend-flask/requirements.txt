@@ -23,3 +23,6 @@ watchtower==3.0.1
 # Rollbar
 rollbar==0.16.3
 blinker==1.5
+cognitojwt>=1.1.0
+werkzeug
+requests

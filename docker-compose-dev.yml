@@ -28,7 +28,7 @@ services:
       - db
       - xray-daemon
     volumes:
-      - ./backend-flask:/backend-flask
+      - ./backend-flask:/app
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://127.0.0.1:4567/api/health && echo 'OK' || exit 1"]
       interval: 20s

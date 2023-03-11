@@ -22,6 +22,11 @@ import logging
 from services.logging.logger import setup_logger
 setup_logger()
 
+from services.middleware.flask_cognito import cognito_auth_required, CognitoAuth
+from services.middleware.config import config_cognito
+
+# configuration
+
 # Rollbar
 from services.logging.rollbar import init_rollbar
 
@@ -31,6 +36,13 @@ logger = logging.getLogger("cruddur")
 frontend = os.getenv("FRONTEND_URL")
 backend = os.getenv("BACKEND_URL")
 app = Flask(__name__)
+
+# Cognito
+config_cognito(app)
+# initialize extension
+cogauth = CognitoAuth(app)
+
+
 
 # instrument with  honeycomb
 init_honycomb(app) 
@@ -43,16 +55,17 @@ if os.getenv("ENABLE_ROLLBAR_LOG") and os.getenv("ENABLE_ROLLBAR_LOG").lower() =
     init_rollbar(app)
 
 origins = [frontend, backend]
-allow_headers = ["content-type","if-modified-since","traceparent"]
+allow_headers = ["content-type","if-modified-since","traceparent", "Authorization"]
 cors = CORS(
     app,
     resources={r"/api/*": {"origins": origins}},
-    expose_headers="location,link",
+    expose_headers="Authorization",
     allow_headers=allow_headers,
     methods="OPTIONS,GET,HEAD,POST",
 )
 
 @app.route("/api/message_groups", methods=["GET"])
+@cognito_auth_required
 def data_message_groups():
     logger.info("message group request is received")
     user_handle = "andrewbrown"
@@ -64,6 +77,7 @@ def data_message_groups():
 
 
 @app.route("/api/messages/@<string:handle>", methods=["GET"])
+@cognito_auth_required
 def data_messages(handle):
     user_sender_handle = "andrewbrown"
     user_receiver_handle = request.args.get("user_reciever_handle")
@@ -80,6 +94,7 @@ def data_messages(handle):
 
 @app.route("/api/messages", methods=["POST", "OPTIONS"])
 @cross_origin()
+@cognito_auth_required
 def data_create_message():
     user_sender_handle = "andrewbrown"
     user_receiver_handle = request.json["user_receiver_handle"]
@@ -96,20 +111,20 @@ def data_create_message():
         return model["data"], 200
     return
 
-
 @app.route("/api/activities/home", methods=["GET"])
+@cognito_auth_required
 def data_home():
     data = HomeActivities.run()
     return data, 200
 
-
 @app.route("/api/activities/notifications", methods=["GET"])
+@cognito_auth_required
 def data_notifications():
     data = NotificationsActivities.run()
     return data, 200
 
-
 @app.route("/api/activities/@<string:handle>", methods=["GET"])
+@cognito_auth_required
 def data_handle(handle):
     model = UserActivities.run(handle)
     if model["errors"] is not None:
@@ -117,8 +132,8 @@ def data_handle(handle):
     else:
         return model["data"], 200
 
-
 @app.route("/api/activities/search", methods=["GET"])
+@cognito_auth_required
 def data_search():
     term = request.args.get("term")
     model = SearchActivities.run(term)
@@ -128,9 +143,9 @@ def data_search():
         return model["data"], 200
     return
 
-
 @app.route("/api/activities", methods=["POST", "OPTIONS"])
 @cross_origin()
+@cognito_auth_required
 def data_activities():
     user_handle = "andrewbrown"
     message = request.json["message"]
@@ -144,6 +159,7 @@ def data_activities():
 
 
 @app.route("/api/activities/<string:activity_uuid>", methods=["GET"])
+@cognito_auth_required
 def data_show_activity(activity_uuid):
     data = ShowActivity.run(activity_uuid=activity_uuid)
     return data, 200
@@ -164,7 +180,7 @@ def data_activities_reply(activity_uuid):
 
 @app.route("/api/health", methods=["GET"])
 def health():
-    logger.info("health request is received")
+    logger.info("health request received")
     data = {"success": True, "message": "healthy"}
     return data, 200
 

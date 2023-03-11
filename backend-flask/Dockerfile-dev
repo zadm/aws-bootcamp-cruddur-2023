@@ -31,4 +31,4 @@ USER appuser
 FROM app As Prod
 # RUN pip install .
 COPY config/gunicorn.conf.py  /etc/gunicorn.conf.py
-CMD ["python3", "-m", "flask", "--app", "app.py:app", "run", "--host", "0.0.0.0", "--port", "4567"]
+CMD ["flask", "--app", "app.py:app", "--debug", "run", "--host", "0.0.0.0", "--port", "4567"]

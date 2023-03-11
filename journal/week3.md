@@ -21,6 +21,6 @@ https://user-images.githubusercontent.com/18516249/224418097-cac9eb34-7ae6-4b4a-
 # Decouple the JWT verify from the application code by writing a  Flask Middleware
 
 
-[python JWT cognito middlewarr](../backend-flask/services/middleware/flask_cognito.py)
+[python JWT cognito Middleware](../backend-flask/services/middleware/flask_cognito.py)
 
-
+[![python JWT cognito Middleware](https://img.youtube.com/vi/qaCcxWenpWI/0.jpg)](https://www.youtube.com/watch?v=qaCcxWenpWI)

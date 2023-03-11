@@ -14,5 +14,7 @@ Sorry for the video quality (Github has a limit size of 10MB)
 
 https://user-images.githubusercontent.com/18516249/224448202-cd8e6311-38eb-4510-91fd-896ab6a37633.mp4
 
+# Implement Custom Recovery Page	
 
+# Watch about different approaches to verifying JWTs	
 

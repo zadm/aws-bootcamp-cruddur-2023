@@ -5,20 +5,33 @@ services:
     image: zk15xyz/cruddur-backend:latest
     build:
       context: backend-flask/
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-dev
     environment:
-      - FRONTEND_URL=${FRONTEND_URL}
-      - BACKEN_URL=${BACKEND_URL}
+      FRONTEND_URL: ${FRONTEND_URL}
+      BACKEN_URL: ${BACKEND_URL}
+      OTEL_EXPORTER_OTLP_ENDPOINT: https://api.honeycomb.io
+      HONEYCOMB_API_KEY: ${HONEYCOMB_API_KEY}
+      OTEL_EXPORTER_OTLP_HEADERS: x-honeycomb-team=${HONEYCOMB_API_KEY}
+      OTEL_SERVICE_NAME: cruddur-backend
+      AWS_XRAY_DAEMON_ADDRESS: xray-daemon:2000
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_REGION}
+      ENABLE_CLOUD_WATCH_LOG: False
+      AWS_XRAY_SDK_ENABLED: False
+      ROLLBAR_ACCESS_TOKEN: ${ROLLBAR_ACCESS_TOKEN}
+      ENABLE_ROLLBAR_LOG: False
     ports:
       - 4567:4567
     depends_on:
       - dynamodb-local
       - db
+      - xray-daemon
     volumes:
       - ./backend-flask:/backend-flask
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://127.0.0.1:4567/api/health && echo 'OK' || exit 1"]
-      interval: 5s
+      interval: 20s
       timeout: 2s
       retries: 3
 
@@ -28,14 +41,24 @@ services:
       context: frontend-react-js/
       dockerfile: Dockerfile
     environment:
-      - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+      OTEL_SERVICE_NAME: cruddur-front
+      HONEYCOMB_API_KEY: ${HONEYCOMB_API_KEY}
+      OTEL_EXPORTER_OTLP_ENDPOINT: https://api.honeycomb.io
+      # REACT env vars
+      REACT_APP_BACKEND_URL: ${REACT_APP_BACKEND_URL}
+      REACT_APP_OTEL_COLLECTOR_ENDPOINT: ${REACT_APP_OTEL_COLLECTOR_ENDPOINT}
+      REACT_APP_AWS_PROJECT_REGION: "${AWS_DEFAULT_REGION}"
+      REACT_APP_AWS_COGNITO_REGION: "${AWS_DEFAULT_REGION}"
+      REACT_APP_AWS_USER_POOLS_ID: "eu-west-1_pIL9bTPxv"
+      REACT_APP_CLIENT_ID: "6k3b101ejkmvk1al0tqjqav1vp"
+
     ports:
       - 3000:3000
     volumes:
       - ./frontend-react-js:/frontend-react-js
     depends_on:
-      backend-flask:
-        condition: service_healthy
+      - backend-flask
+      - otel-collector
 
 
   dynamodb-local:
@@ -60,6 +83,29 @@ services:
       - '5432:5432'
     volumes: 
       - db:/var/lib/postgresql/data
+
+  xray-daemon:
+    image: "amazon/aws-xray-daemon"
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: eu-west-1
+    command:
+      - "xray --log-level debug -o -b xray-daemon:2000"
+    ports:
+      - 2000:2000/udp
+
+  otel-collector:
+    environment:
+      HONEYCOMB_API_KEY: "${HONEYCOMB_API_KEY}"
+    image: "otel/opentelemetry-collector"
+    command: ["--config=/etc/otel-collector-config.yml"]
+
+    volumes:
+      - ./frontend-react-js/otel-collector-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - 4318:4318   # pprof extension
+
 
 networks: 
   internal-network:

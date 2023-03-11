@@ -16,6 +16,11 @@ https://user-images.githubusercontent.com/18516249/224418097-cac9eb34-7ae6-4b4a-
 
 [![Cruddur Password Recovery](https://img.youtube.com/vi/aDf5nvEEiJA/0.jpg)](https://www.youtube.com/watch?v=aDf5nvEEiJA)
 
-# Watch about different approaches to verifying JWTs
+# Homework Challenges 
+
+# Decouple the JWT verify from the application code by writing a  Flask Middleware
+
+
+[python JWT cognito middlewarr](../backend-flask/services/middleware/flask_cognito.py)
 
 

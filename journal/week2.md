@@ -43,9 +43,9 @@
 ## Setup AWS X-Ray Resources
 All the aws resources have been created using terraform
 
-[xray terraform stack](../terraform/backend-app/stacks/xray/)
+[xray terraform stack](../terraform/stacks/xray/)
 
-[xray terraform config](../terraform/backend-app/config/xray/)
+[xray terraform config](../terraform/config/xray/)
 
 
 1. Create xray group

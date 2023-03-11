@@ -19,6 +19,9 @@ https://user-images.githubusercontent.com/18516249/224448202-cd8e6311-38eb-4510-
 https://www.youtube.com/watch?v=aDf5nvEEiJA
 [![Password Recovery](https://img.youtube.com/vi/aDf5nvEEiJA/0.jpg)](https://www.youtube.com/watch?v=aDf5nvEEiJA)
 
+[<img src="https://img.youtube.com/vi/aDf5nvEEiJA/0.jpg" width="50%">](https://www.youtube.com/watch?v=aDf5nvEEiJA "Cruddur Password Recovery")
+
+
 # Watch about different approaches to verifying JWTs
 
 

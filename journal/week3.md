@@ -16,5 +16,8 @@ https://user-images.githubusercontent.com/18516249/224448202-cd8e6311-38eb-4510-
 
 # Implement Custom Recovery Page	
 
-# Watch about different approaches to verifying JWTs	
+https://www.youtube.com/watch?v=aDf5nvEEiJA
+
+# Watch about different approaches to verifying JWTs
+
 

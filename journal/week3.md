@@ -11,7 +11,6 @@ https://user-images.githubusercontent.com/18516249/224418097-cac9eb34-7ae6-4b4a-
 # Implement Custom Signin/Signup/Custom/Confirmation Page
 
 [![Signin/Signup/Custom/Confirmation Page](https://img.youtube.com/vi/ncujxRsbOe8/0.jpg)](https://www.youtube.com/watch?v=ncujxRsbOe8)
-https://youtu.be/ncujxRsbOe8
 
 # Implement Custom Recovery Page	
 

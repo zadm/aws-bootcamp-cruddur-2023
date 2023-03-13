@@ -43,3 +43,7 @@ ports:
   - name: otel-collector
     port: 4318
     visibility: public
+
+  - name: jwt-auth
+    port: 8080
+    visibility: public

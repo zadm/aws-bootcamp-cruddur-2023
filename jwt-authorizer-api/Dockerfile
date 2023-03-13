@@ -6,4 +6,4 @@ WORKDIR /app
 RUN npm install
 
 FROM app As Prod
-CMD ["npm", "start"]
+CMD ["./entrypoint.sh", "NODE"]

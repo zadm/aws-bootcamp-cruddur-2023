@@ -1,5 +1,7 @@
 import './HomeFeedPage.css';
 import React from "react";
+import axios from "axios";
+
 
 import { Auth } from 'aws-amplify';
 
@@ -20,12 +22,13 @@ export default function HomeFeedPage() {
   const dataFetchedRef = React.useRef(false);
 
   const loadData = async () => {
+    console.log(`Bearer ${localStorage.getItem("access_token")}`)
     try {
-      const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/home`
+      const backend_url = `${process.env.REACT_APP_ENVOY_URL}/api/activities/home`
       const res = await fetch(backend_url, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`
+          Authorization:`Bearer ${localStorage.getItem("access_token")}`
         }
       });
       let resJson = await res.json();

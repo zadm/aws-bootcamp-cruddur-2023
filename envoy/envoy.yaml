@@ -1,0 +1,87 @@
+admin:
+  address:
+    socket_address: { address: 0.0.0.0, port_value: 8001 }
+
+static_resources:
+  listeners:
+  - name: listener_0
+    address:
+      socket_address: { address: 0.0.0.0, port_value: 80 }
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_http
+          codec_type: AUTO
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains: ["*"]
+              cors:
+                allow_origin_string_match:
+                  prefix:
+                    http://*
+                    https://*
+                allow_methods: GET, PUT, POST, DELETE, OPTIONS
+                allow_headers: "*"
+                expose_headers: "Authorization, content-length, content-type"
+              routes:
+              - match: { prefix: "/api" }
+                route: { cluster: backend-flask }
+                typed_per_filter_config:
+                  envoy.filters.http.cors:
+                    "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.CorsPolicy
+                    allow_origin_string_match:
+                      prefix:
+                        http://*
+                        https://*
+                    allow_methods: GET, PUT, POST, DELETE, OPTIONS
+                    allow_headers: "*"
+                    expose_headers: "Authorization, content-length, content-type"
+          http_filters:
+          - name: envoy.filters.http.cors
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
+          - name: envoy.filters.http.jwt_authn
+            typed_config:
+              "@type": "type.googleapis.com/envoy.extensions.filters.http.jwt_authn.v3.JwtAuthentication"
+              providers:
+                cognito_provider:
+                    # from_headers:
+                    #   - name: Authorization
+                    #     value_prefix: "Bearer "
+                  clock_skew_seconds: 600
+                  issuer: "https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_pIL9bTPxv"
+                  # audiences:
+                  #   - "6k3b101ejkmvk1al0tqjqav1vp"
+                  remote_jwks:
+                    http_uri:
+                      uri: "https://cognito-idp.eu-west-1.amazonaws.com/eu-west-1_pIL9bTPxv/.well-known/jwks.json"
+                      cluster: jwks_cluster
+                      timeout: 5s
+
+                  forward: true
+              rules:
+                - match:
+                    prefix: "/api"
+                  requires:
+                    provider_name: cognito_provider
+          - name: envoy.filters.http.router
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+  clusters:
+  - name: backend-flask
+    connect_timeout: 0.25s
+    type: STRICT_DNS
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: backend-flask
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: backend-flask
+                port_value: 4567

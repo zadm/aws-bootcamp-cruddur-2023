@@ -112,14 +112,16 @@ def data_create_message():
     return
 
 @app.route("/api/activities/home", methods=["GET"])
-@cognito_auth_required
-def data_home():
+# @cognito_auth_required
+def data_home():    
+    logger.debug(request.headers)
     data = HomeActivities.run()
     return data, 200
 
 @app.route("/api/activities/notifications", methods=["GET"])
-@cognito_auth_required
+# @cognito_auth_required
 def data_notifications():
+    logger.debug(request.headers)
     data = NotificationsActivities.run()
     return data, 200
 

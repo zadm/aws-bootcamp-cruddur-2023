@@ -7,7 +7,7 @@ def config_cognito(app: Flask):
     config = {
             'COGNITO_REGION': 'eu-west-1',
             'COGNITO_USERPOOL_ID': 'eu-west-1_pIL9bTPxv',
-
+    
             # optional
             'COGNITO_APP_CLIENT_ID': '6k3b101ejkmvk1al0tqjqav1vp',  # client ID you wish to verify user is authenticated against   
             'COGNITO_CHECK_TOKEN_EXPIRATION': False,  # disable token expiration checking for testing purposes

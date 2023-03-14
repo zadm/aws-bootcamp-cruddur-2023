@@ -49,20 +49,20 @@ static_resources:
                   prefix: "/api/activities/home"
                 route:
                   cluster: local_service
-                typed_per_filter_config:
-                  envoy.filters.http.cors:
-                    "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.CorsPolicy
-                    filter_enabled:
-                      default_value:
-                        numerator: 0
-                        denominator: HUNDRED
-                    allow_methods: GET, PUT, POST, DELETE, OPTIONS
-                    allow_headers: Origin, Content-Type, Accept, Authorization
-                    expose_headers: Authorization
-                    # max_age: "600"
-                    allow_origin_string_match:
-                    - safe_regex:
-                        regex: \*
+                # typed_per_filter_config:
+                #   envoy.filters.http.cors:
+                #     "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.CorsPolicy
+                #     filter_enabled:
+                #       default_value:
+                #         numerator: 0
+                #         denominator: HUNDRED
+                #     allow_methods: GET, PUT, POST, DELETE, OPTIONS
+                #     allow_headers: Origin, Content-Type, Accept, Authorization
+                #     expose_headers: Authorization
+                #     # max_age: "600"
+                #     allow_origin_string_match:
+                #     - safe_regex:
+                #         regex: \*
                 #   timeout: 0s
                 # typed_per_filter_config:
                 #   envoy.filters.http.ext_authz:

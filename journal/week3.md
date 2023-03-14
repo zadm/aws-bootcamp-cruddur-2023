@@ -50,6 +50,10 @@ Envoy front proxy is setup in front of the jwt-authorizer in order to proxy the 
 
 ## `POC `
 
+[![Cruddur JWT with AWS lib](https://img.youtube.com/vi/Kb0ap_SgJuo/0.jpg)](https://www.youtube.com/watch?v=Kb0ap_SgJuo)
+
+
+
 
 
 

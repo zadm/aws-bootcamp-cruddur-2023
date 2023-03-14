@@ -43,13 +43,13 @@ All the requests sent to `"/auth/*"` endpoint will be processed and run a JWT va
 [Docker File](../jwt-authorizer-api/Dockerfile)
 
 ### `Envoy front proxy`
-Envoy front proxy is setup in front of the jwt-authorizer in order to proxy the http request send from the react app. All the request with the path /api/ are intercepted and validated the token with jwt-authorizer. 
+Envoy front proxy is setup in front of the jwt-authorizer in order to proxy the http request send from the react app. All the requests with the path /api/ are intercepted and validate the token with jwt-authorizer app. 
 
 [Envoy config file](../envoy/front-envoy.yaml)
 
 [Envoy Dockerfile](../envoy/Dockerfile)
 
-## `POC `
+## POC 
 
 [![Cruddur JWT with AWS lib](https://img.youtube.com/vi/Kb0ap_SgJuo/0.jpg)](https://www.youtube.com/watch?v=Kb0ap_SgJuo)
 

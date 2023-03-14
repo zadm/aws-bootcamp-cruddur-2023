@@ -35,12 +35,12 @@ https://user-images.githubusercontent.com/18516249/224418097-cac9eb34-7ae6-4b4a-
 ### Workflow
 1. Client sent a http request with `Authrization: Bear TOKEN` in the  header 
 2. Envoy receives the request and send it to jwt-authorizer application 
-3. jwt-authorizer application coneect to AWS cognito to validate the token 
+3. jwt-authorizer application connect to AWS cognito to validate the token 
 4. If the token is valid
    1. jwt-authorizer response an http response with code 200
-   2. Envoy forward the origin request to tye flask app
+   2. Envoy forward the origin request to the flask app
 
-5. If the token is node valide 
+5. If the token is node valid
    1. jwt-authorizer response an http response with code 403
    2. Envoy send an HTTP response to the client with code 403
 
